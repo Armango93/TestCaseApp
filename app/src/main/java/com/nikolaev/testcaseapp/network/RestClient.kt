@@ -1,5 +1,7 @@
 package com.nikolaev.testcaseapp.network
 
+import com.nikolaev.testcaseapp.model.BaseResponse
+import com.nikolaev.testcaseapp.model.Employee
 import retrofit2.http.GET
 
 /**
@@ -9,6 +11,6 @@ import retrofit2.http.GET
  * @author Andrey Nikolaev
  */
 interface RestClient {
-//    @GET("65gb/static/raw/master/testTask.json")
-//    suspend fun getEmployeeData(): BaseResponse<>
+    @GET("65gb/static/raw/master/testTask.json")
+    suspend fun getEmployeeData(): BaseResponse<List<Employee>>
 }

@@ -1,6 +1,8 @@
 package com.nikolaev.testcaseapp.common
 
 import android.app.Application
+import com.nikolaev.testcaseapp.BuildConfig
+import com.nikolaev.testcaseapp.network.ErrorMapper
 import io.realm.Realm
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -11,12 +13,15 @@ class CommonApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         initTimber()
+        ErrorMapper.init(applicationContext)
         Realm.init(this)
         startKoin {
             androidContext(this@CommonApplication)
             modules(
-                    datastoreModule,
-                    useCasesModule
+                datastoreModule,
+                useCasesModule,
+                viewModelsModel,
+                networkModule
             )
             logger(KoinLogger())
         }

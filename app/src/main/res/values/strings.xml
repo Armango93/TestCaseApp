@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">TestCaseApp</string>
+    <string name="noInternetConnection">Проверьте ваше интернет соединение</string>
+    <string name="timeoutError">Проблемы с сервером, попробуйте еще раз позже</string>
+    <string name="smthWentWrong">Что-то пошло не так</string>
+    <string name="specialty_id_text">Id специальности: %d</string>
+    <string name="full_name_template">%s %s</string>
+    <string name="data_of_birth_template">%s.%s.%s</string>
 </resources>
