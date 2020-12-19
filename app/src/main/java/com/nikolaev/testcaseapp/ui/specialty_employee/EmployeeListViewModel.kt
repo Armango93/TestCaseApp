@@ -20,7 +20,8 @@ class EmployeeListViewModel(
 
 
     fun toEmployeeProfile(employee: Employee) {
-        TODO("Not yet implemented")
+        navController?.navigate(
+            EmployeeListFragmentDirections.actionEmployeeListFragmentToProfileFragment(employee))
     }
 
     fun getEmployeesBySpecialty(specialty: Specialty) {

@@ -37,4 +37,9 @@ class SpecialtyListViewModel(
             SpecialtyListFragmentDirections.actionSpecialtyListFragmentToEmployeeListFragment(specialty)
         )
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        coroutineContext.cancel()
+    }
 }

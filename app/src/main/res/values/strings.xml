@@ -6,4 +6,5 @@
     <string name="specialty_id_text">Id специальности: %d</string>
     <string name="full_name_template">%s %s</string>
     <string name="data_of_birth_template">%s.%s.%s</string>
+    <string name="age_template">Возраст: %s</string>
 </resources>

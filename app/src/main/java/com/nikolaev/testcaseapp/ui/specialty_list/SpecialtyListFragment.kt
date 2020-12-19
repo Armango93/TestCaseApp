@@ -46,20 +46,6 @@ class SpecialtyListFragment : BaseFragment() {
 
         refreshLayout.setOnRefreshListener(refreshListener)
         viewModel.getAllSpecialties()
-    }
-
-    private fun initRecycler(items: Collection<Specialty>) {
-        employeeRecycler.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        employeeRecycler.adapter = adapter
-        adapter.setItems(items)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
 
         viewModel.specialtyListLivaData.observe(viewLifecycleOwner, Observer {
             if (it.status == VmResponse.Status.LOADING) progress.visible() else progress.gone()
@@ -77,5 +63,21 @@ class SpecialtyListFragment : BaseFragment() {
                 ).show()
             }
         })
+    }
+
+    private fun initRecycler(items: Collection<Specialty>) {
+        employeeRecycler.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        employeeRecycler.adapter = adapter
+        adapter.setItems(items)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        employeeRecycler.adapter = null
+        refreshLayout.setOnRefreshListener(null)
     }
 }

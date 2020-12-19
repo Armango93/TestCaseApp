@@ -23,5 +23,18 @@
             android:name="specialty"
             app:argType="com.nikolaev.testcaseapp.model.Specialty"
             app:nullable="false" />
+        <action
+            android:id="@+id/action_employeeListFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.nikolaev.testcaseapp.ui.employee_profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile">
+        <argument
+            android:name="employee"
+            app:argType="com.nikolaev.testcaseapp.model.Employee"
+            app:nullable="false" />
     </fragment>
 </navigation>

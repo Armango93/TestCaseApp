@@ -1,13 +1,16 @@
 package com.nikolaev.testcaseapp
 
 import android.app.Activity
+import android.content.Context
 import android.content.res.Resources
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.navigation.NavController
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.Navigation
+import com.bumptech.glide.Glide
 import com.nikolaev.testcaseapp.common.BaseFragment
 import com.nikolaev.testcaseapp.model.BaseResponse
 import com.nikolaev.testcaseapp.model.CoreResponse
@@ -85,3 +88,35 @@ val Int.dp
         TypedValue.COMPLEX_UNIT_DIP, this.toFloat(),
         Resources.getSystem().displayMetrics
     ).roundToInt()
+
+fun ImageView.setImage(url: String, context: Context) {
+    Glide
+        .with(context)
+        .load(url)
+        .centerCrop()
+        .into(this)
+}
+
+fun String?.formatDataOfBirth(context: Context): String? {
+    val bdArray = this?.split("-")
+    if (bdArray != null) {
+        if (bdArray.size == 3) {
+            return if (bdArray[0].length > 2) {
+                String.format(
+                    context.getString(R.string.data_of_birth_template),
+                    bdArray[2],
+                    bdArray[1],
+                    bdArray[0]
+                )
+            } else {
+                String.format(
+                    context.getString(R.string.data_of_birth_template),
+                    bdArray[0],
+                    bdArray[1],
+                    bdArray[2]
+                )
+            }
+        }
+    }
+    return null
+}

@@ -49,22 +49,8 @@ class EmployeeListFragment : BaseFragment() {
 
         refreshLayout.setOnRefreshListener(refreshListener)
         viewModel.getEmployeesBySpecialty(specialty)
-    }
 
-    private fun initRecycler(items: Collection<Employee>) {
-        employeeRecycler.layoutManager = LinearLayoutManager(
-            context,
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        employeeRecycler.adapter = adapter
-        adapter.setItems(items)
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
-        viewModel.employeeListLivaData.observe(viewLifecycleOwner, Observer{
+        viewModel.employeeListLivaData.observe(viewLifecycleOwner, Observer {
             if (it.status == VmResponse.Status.LOADING) progress.visible() else progress.gone()
 
             if (it.status == VmResponse.Status.SUCCESS) {
@@ -80,5 +66,21 @@ class EmployeeListFragment : BaseFragment() {
                 ).show()
             }
         })
-}
+    }
+
+    private fun initRecycler(items: Collection<Employee>) {
+        employeeRecycler.layoutManager = LinearLayoutManager(
+            context,
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        employeeRecycler.adapter = adapter
+        adapter.setItems(items)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        employeeRecycler.adapter = null
+        refreshLayout.setOnRefreshListener(null)
+    }
 }

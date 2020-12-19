@@ -31,6 +31,7 @@ class DataStorage : EmployeeRepo {
         Realm.getInstance(configuration).use { r ->
             r.executeTransactionAsync { realm ->
                 realm.block()
+                realm.close()
             }
         }
     }
@@ -44,20 +45,28 @@ class DataStorage : EmployeeRepo {
     }
 
     override fun getAllUniqueSpecialties(): List<Specialty> {
-        with(ensureRealmCreated()) {
-            return copyFromRealm(
-                where<Specialty>().distinct(SpecialtyFields.SPECIALTY_ID).findAll()
-            )
+        try {
+            with(ensureRealmCreated()) {
+                return copyFromRealm(
+                    where<Specialty>().distinct(SpecialtyFields.SPECIALTY_ID).findAll()
+                )
+            }
+        } finally {
+            realm?.close()
         }
     }
 
     override fun getAllEmployeesBySpecialty(specialty: Specialty): List<Employee> {
+        try {
         with(ensureRealmCreated()) {
             return copyFromRealm(
                 where<Employee>()
                     .equalTo(EmployeeFields.SPECIALTY_LIST.SPECIALTY_ID, specialty.specialtyId)
                     .findAll()
             )
+        }
+        } finally {
+            realm?.close()
         }
     }
 
