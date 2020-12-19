@@ -59,6 +59,7 @@ class EmployeeListFragment : BaseFragment() {
             }
 
             if (it.status == VmResponse.Status.ERROR) {
+                if (refreshLayout.isRefreshing) refreshLayout.isRefreshing = false
                 Toast.makeText(
                     context,
                     it.error?.message ?: getString(R.string.smthWentWrong),

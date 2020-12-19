@@ -97,7 +97,7 @@ fun ImageView.setImage(url: String, context: Context) {
         .into(this)
 }
 
-fun String?.formatDataOfBirth(context: Context): String? {
+fun String?.formatDateOfBirth(context: Context): String? {
     val bdArray = this?.split("-")
     if (bdArray != null) {
         if (bdArray.size == 3) {

@@ -60,13 +60,13 @@ class ProfileFragment : BaseFragment() {
     }
 
     private fun fillDataOfBirthAndAge() {
-        val res = employee.birthday?.formatDataOfBirth(requireContext())
+        val res = employee.birthday?.formatDateOfBirth(requireContext())
         if (!res.isNullOrEmpty()) {
             dateOfBirth.text = res
             age.text = getAgeOfEmployee(res)
         } else {
-            dateOfBirth.gone()
-            age.gone()
+            dateOfBirth.text = getString(R.string.no_date_stub)
+            age.text = getString(R.string.no_date_stub)
         }
     }
 

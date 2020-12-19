@@ -55,23 +55,10 @@ class EmployeeListAdapter(
                 data.lastName?.formatName()
             )
 
-            val bdArray = data.birthday?.split("-")
-
-            val param = employeeName.layoutParams as ViewGroup.MarginLayoutParams
-            if (bdArray != null) {
-                employeeDateOfBirth.visible()
-                param.bottomMargin = 4.dp
-                if (bdArray.size == 3) {
-                    employeeDateOfBirth.text = String.format(
-                        itemView.context.getString(R.string.data_of_birth_template),
-                        bdArray[2],
-                        bdArray[1],
-                        bdArray[0]
-                    )
-                }
+            if (!data.birthday.isNullOrEmpty()) {
+                employeeDateOfBirth.text = data.birthday?.formatDateOfBirth(itemView.context)
             } else {
-                employeeDateOfBirth.gone()
-                param.bottomMargin = 8.dp
+                employeeDateOfBirth.text = itemView.context.getString(R.string.no_date_stub)
             }
         }
     }
