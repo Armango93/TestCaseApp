@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.nikolaev.testcaseapp"
-        minSdkVersion 16
+        minSdkVersion 16  // this version is not 15 because of realm - it requires minSdk 16
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
